@@ -37,7 +37,7 @@ export interface MultisigActionStatus {
   account?: string // Include other fields as necessary
 }
 
-export interface MultisigProps extends ModalProps {
+export interface MultisigModalProps extends ModalProps {
   isOpen: boolean
   className?: string
   onClose: () => void
