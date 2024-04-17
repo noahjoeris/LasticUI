@@ -1,28 +1,11 @@
 import PrimaryButton from '@/components/button/PrimaryButton'
 import Modal from '@/components/modal/Modal'
+import { CoreListing } from '@/hooks/useListings'
 import { RegionIdProps } from '@/types/broker'
 import { truncateHash } from '@/utils/truncateHash'
 import { encodeAddress } from '@polkadot/util-crypto'
 import { useBalance, useInkathon } from '@poppyseed/lastic-sdk'
 import { FC, useState } from 'react'
-
-interface Core {
-  id: number
-  coreNumber: string
-  size: number
-  cost: number
-  reward: number
-  owner: string
-  currencyCost: string
-  currencyReward: string
-  mask: string
-  begin: string
-  end: string
-}
-
-interface Database {
-  listings: Core[]
-}
 
 interface ListingsModalProps {
   isOpen: boolean
@@ -36,9 +19,9 @@ const ListingsModal: FC<ListingsModalProps> = ({ isOpen, onClose, regionId }) =>
   let { tokenSymbol } = useBalance(activeAccount?.address, true)
 
   const listCoreForSale = async () => {
-    const coreData: Core = {
+    const coreData: CoreListing = {
       id: Date.now(), // Temporary unique ID, replace as needed
-      coreNumber: regionId.core,
+      coreNumber: Number(regionId.core),
       size: 1, // Update this as per your logic
       cost: parseInt(newOwner), // Assuming newOwner is holding the cost
       reward: 0, // Update this as per your logic
